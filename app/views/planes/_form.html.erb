@@ -1,0 +1,27 @@
+<%= form_with(model: plane, local: true) do |form| %>
+  <% if plane.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(plane.errors.count, "error") %> prohibited this plane from being saved:</h2>
+
+      <ul>
+      <% plane.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="form-group">
+    <%= form.fields_for :seat_groups do |seat_group| %>
+      <%= render "seat_group_field", f: seat_group %>
+    <% end %>
+    <%= link_to_add_fields "Add steat_group", form, :seat_groups %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

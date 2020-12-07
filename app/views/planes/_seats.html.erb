@@ -1,0 +1,13 @@
+<% plane.seat_groups.each_with_index do |group, index|%>
+  <div class="col border">
+    <% (0..group.total_rows - 1).each do |row|%>
+       <div class="d-flex">
+        <%(0..group.total_columns - 1).each do |col|%>
+          <div class="border text-center bg-<%= seat_type(col, group.total_columns - 1, index, @total_groups)%>" style="width: 50px;height: 50px;">
+            <%= group.seat_info(col, row).try(:status) > 0 ? group.seat_info(col, row).id : "-"%>
+          </div>
+        <%end%>
+        </div>
+    <%end%>
+  </div>
+<%end%>

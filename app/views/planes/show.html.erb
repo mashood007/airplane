@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @plane.name %>
+</p>
+
+  <div class="col-2 text-center p-4">
+    <div class='bg-success'>Window seat</div>
+    <div class='bg-danger'>Middle seat</div>
+    <div class='bg-info'>Aisle seat</div>
+  </div>
+<div class="row">
+  <%= render 'seats', plane: @plane%>
+</div>
+<div class="row">
+  <div class="col-5">
+    Free seats: <%= "#{@plane.seats.free_seats.size}/#{@plane.seats.size}"%>
+  </div>
+  <div class="col-5">
+    Queue: <%=@plane.queue%>
+  </div>
+</div>
+
+<%= form_tag fill_seats_plane_path(id: @plane.id) , html: {class: "form-group"}, method: :get do %>
+  <%= label_tag :seat_numbers  %>
+  <%= number_field_tag :total, 0  %>
+  <%= submit_tag "Fill" %>
+<% end %>
+<%= link_to 'Back', planes_path %>
